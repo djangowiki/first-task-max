@@ -1,0 +1,32 @@
+{
+  "name": "max.ng",
+  "version": "1.0.0",
+  "description": "External API using Test at Max.ng",
+  "main": "server.js",
+  "scripts": {
+    "start": "SET NODE_ENV=production && node server",
+    "dev": "nodemon server"
+  },
+  "author": "IkennaGIfenna",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "ipware": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.15",
+    "morgan": "^1.10.0",
+    "request": "^2.88.2",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
