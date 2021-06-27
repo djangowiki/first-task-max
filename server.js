@@ -36,6 +36,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// cors fix / making sure an outside client can use this api without issues
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 // Serving Static Files / React App in Production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder.
@@ -44,12 +50,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
   });
 }
-
-// cors fix / making sure an outside client can use this api without issues
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 // Load Routes
 app.use('/api/v1/star-wars/movies', movies);
