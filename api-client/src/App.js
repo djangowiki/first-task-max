@@ -11,6 +11,20 @@ const App = () => {
         <p>A NodeJS Backend Task by IkennaGIfenna</p>
         <a
           className='App-link'
+          href='https://github.com/djangowiki/first-task-max'
+          target='_blank'
+          rel='noopener noreferrer'>
+          Github Repo
+        </a>
+        <a
+          className='App-link'
+          href='https://documenter.getpostman.com/view/9429895/Tzedi5MS'
+          target='_blank'
+          rel='noopener noreferrer'>
+          API Documentation.
+        </a>
+        <a
+          className='App-link'
           href='https://max.ng/'
           target='_blank'
           rel='noopener noreferrer'>
