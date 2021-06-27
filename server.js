@@ -27,20 +27,20 @@ connectDB();
 
 // Middlewares.
 app.use(express.json()); // for req.body / body parser
-app.use(hpp());
-app.use(xss());
-app.use(helmet());
-app.use(cors());
+// app.use(hpp());
+// app.use(xss());
+// app.use(helmet());
+// app.use(cors());
 app.use(mongoSanitize());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
 // cors fix / making sure an outside client can use this api without issues
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 
 // Load Routes
 app.use('/api/v1/star-wars/movies', movies);
