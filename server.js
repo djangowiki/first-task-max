@@ -27,6 +27,7 @@ connectDB();
 
 // Middlewares.
 app.use(express.json()); // for req.body / body parser
+// CSP Error on client side made me comment this. We live to fight another day
 // app.use(hpp());
 // app.use(xss());
 // app.use(helmet());
