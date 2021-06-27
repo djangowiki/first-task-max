@@ -7,8 +7,9 @@
     "start": "node server.js",
     "backend": "nodemon server",
     "client": "npm start --prefix api-client",
-    "dev": "concurrently \"npm run backend\" \"npm run client\""
-    
+    "dev": "concurrently \"npm run backend\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix api-client && npm run build --prefix api-client"
+  
   },
   "author": "IkennaGIfenna",
   "license": "ISC",

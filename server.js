@@ -27,23 +27,28 @@ connectDB();
 
 // Middlewares.
 app.use(express.json()); // for req.body / body parser
-// app.use(hpp());
-// app.use(xss());
-// app.use(helmet());
-// app.use(cors());
+app.use(hpp());
+app.use(xss());
+app.use(helmet());
+app.use(cors());
 app.use(mongoSanitize());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// cors fix / making sure an outside client can use this api without issues
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   next();
-// });
+// Serving Static Files / React App in Production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder.
+  app.use(express.static('api-client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
+  });
+}
 
-app.get('/', (req, res, next) => {
-  res.send('Hello World');
+// cors fix / making sure an outside client can use this api without issues
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
 });
 
 // Load Routes
@@ -52,18 +57,8 @@ app.use('/api/v1/movies/characters', characters);
 app.use('/api/v1/movie/comments/', comments);
 // Error Handler Middleware
 app.use(errorHandler);
-
 // Custom Middlewares
 app.use(limiter);
-
-// Serving Static Files / React App in Production
-// if (process.env.NODE_ENV === 'production') {
-//   // Set static folder.
-//   app.use(express.static('api-client/build'));
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
-//   });
-// }
 
 // Create Server
 const PORT = process.env.PORT;
