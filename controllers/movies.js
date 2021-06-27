@@ -1,8 +1,6 @@
 const axios = require('axios');
 const asyncHandler = require('../middlewares/async');
 const ErrorResponse = require('../helpers/errorResponse');
-const Movie = require('../model/Movie');
-const Comment = require('../model/Comment');
 
 // @info - Fetches movies from the swapi using axios
 // @endpoint - /api/v1/star-wars/movies

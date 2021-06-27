@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const morgan = require('morgan');
+const cors = require('cors');
 
 // Init app
 const app = express();
@@ -28,13 +29,16 @@ app.use(express.json()); // for req.body / body parser
 app.use(hpp());
 app.use(xss());
 app.use(helmet());
+app.use(cors());
 app.use(mongoSanitize());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res, next) => {
-  res.send('A Nodejs Backend task by Max.ng');
+// cors fix / making sure an outside client can use this api without issues
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
 });
 
 // Load Routes
@@ -46,6 +50,15 @@ app.use(errorHandler);
 
 // Custom Middlewares
 app.use(limiter);
+
+// Serving Static Files / React App in Production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder.
+  app.use(express.static('api-client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
+  });
+}
 
 // Create Server
 const PORT = process.env.PORT;

@@ -5,13 +5,18 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server"
+    "backend": "nodemon server",
+    "client": "npm start --prefix api-client",
+    "dev": "concurrently \"npm run backend\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix api-client && npm run build --prefix api-client"
+  
   },
   "author": "IkennaGIfenna",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
