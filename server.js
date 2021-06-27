@@ -1,6 +1,7 @@
 // Modules
 const express = require('express');
 const dotenv = require('dotenv');
+const path = require('path');
 const hpp = require('hpp');
 const helmet = require('helmet');
 const xss = require('xss-clean');
