@@ -33,6 +33,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.get('/', (req, res, next) => {
+  res.send('A Nodejs Backend task by Max.ng');
+});
+
 // Load Routes
 app.use('/api/v1/star-wars/movies', movies);
 app.use('/api/v1/movies/characters', characters);
