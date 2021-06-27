@@ -42,6 +42,10 @@ if (process.env.NODE_ENV === 'development') {
 //   next();
 // });
 
+app.get('/', (req, res, next) => {
+  res.send('Hello World');
+});
+
 // Load Routes
 app.use('/api/v1/star-wars/movies', movies);
 app.use('/api/v1/movies/characters', characters);
@@ -53,13 +57,13 @@ app.use(errorHandler);
 app.use(limiter);
 
 // Serving Static Files / React App in Production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder.
-  app.use(express.static('api-client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   // Set static folder.
+//   app.use(express.static('api-client/build'));
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'api-client', 'build', 'index.html'));
+//   });
+// }
 
 // Create Server
 const PORT = process.env.PORT;
